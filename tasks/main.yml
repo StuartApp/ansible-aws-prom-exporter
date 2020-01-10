@@ -1,0 +1,34 @@
+---
+
+- name: Install aws-prom-exporter
+  pip:
+    name: "{{ aws_prom_exporter_repo_url }}@{{ aws_prom_exporter_version }}"
+
+- name: Create config dir
+  file:
+    path: "{{ aws_prom_exporter_config_file_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Check config.yaml already exists
+  stat:
+    path: "{{ aws_prom_exporter_config_file_dir }}/config.yaml"
+  register: aws_prom_exporter_config_file_stat
+
+- name: Create config.yaml
+  copy:
+    content: "{{ aws_prom_exporter_config | to_nice_yaml }}"
+    dest: "{{ aws_prom_exporter_config_file_dir }}/config.yaml"
+  notify: Restart aws-prom-exporter service
+
+- name: Add systemd service unit
+  template:
+    src: "aws-prom-exporter.service.j2"
+    dest: "/etc/systemd/system/aws-prom-exporter.service"
+
+- name: Configure service
+  systemd:
+    name: aws-prom-exporter
+    state: "{{ aws_prom_exporter_svc_state }}"
+    daemon_reload: true
+    enabled: "{{ aws_prom_exporter_svc_enabled }}"

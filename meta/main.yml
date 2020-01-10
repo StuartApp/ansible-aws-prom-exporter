@@ -1,0 +1,22 @@
+---
+galaxy_info:
+  author: Jordi Clariana
+  description: AWS Prometheus Exporter installation and configuration role
+  company: Stuart Delivery
+
+
+  license: GPL-3.0-only
+
+  min_ansible_version: 2.8
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - 16.04
+        - 18.04
+
+  galaxy_tags:
+    - prometheus
+    - aws
+    - rds
+    - mysql

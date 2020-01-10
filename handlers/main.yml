@@ -1,0 +1,11 @@
+---
+
+- name: Restart aws-prom-exporter service
+  systemd:
+    name: aws-prom-exporter
+    state: restarted
+  # Restart only if config.yaml has changed and is not first installation
+  # and service is enabled
+  when:
+    - aws_prom_exporter_config_file_stat.stat.exists
+    - aws_prom_exporter_svc_enabled

@@ -1,0 +1,15 @@
+[Unit]
+Description=AWS Prometheus Exporter
+Documentation=https://github.com/StuartApp/aws-prom-exporter
+After=docker.service network.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory={{ aws_prom_exporter_config_file_dir }}
+ExecStart=/usr/local/bin/aws-prom-exporter
+User=root
+Group=root
