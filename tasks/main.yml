@@ -3,6 +3,7 @@
 - name: Install aws-prom-exporter
   pip:
     name: "{{ aws_prom_exporter_repo_url }}@{{ aws_prom_exporter_version }}"
+    executable: pip3
 
 - name: Create config dir
   file:

@@ -8,7 +8,7 @@ aws_prom_exporter_version: v0.2
 
 # Configuration settings as specified in aws-prom-exporter repository README
 # If empty, aws-prom-exporter defaults will be used (and an empty config.yaml file will be created)
-aws_prom_exporter_config: ""
+aws_prom_exporter_config: {}
 
 # Where to create the configuration file
 aws_prom_exporter_config_file_dir: /etc/aws-prom-exporter
